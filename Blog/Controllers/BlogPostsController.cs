@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Blog.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Blog.Controllers
 {
@@ -15,9 +17,12 @@ namespace Blog.Controllers
         private BlogDBContext db = new BlogDBContext();
 
         // GET: BlogPosts
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.BlogPosts.ToList());
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            
+            return View(db.BlogPosts.ToList().ToPagedList(pageNumber, pageSize));
         }
 
         // GET: BlogPosts/Details/5
