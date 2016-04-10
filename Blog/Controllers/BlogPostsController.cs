@@ -17,12 +17,10 @@ namespace Blog.Controllers
         private BlogDBContext db = new BlogDBContext();
 
         // GET: BlogPosts
-        public ActionResult Index(int? page)
+        public ActionResult Index()
         {
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            
-            return View(db.BlogPosts.ToList().ToPagedList(pageNumber, pageSize));
+           
+            return View(db.BlogPosts.ToList()); 
         }
 
         // GET: BlogPosts/Details/5
@@ -37,6 +35,8 @@ namespace Blog.Controllers
             {
                 return HttpNotFound();
             }
+
+           
             return View(blogPost);
         }
 
